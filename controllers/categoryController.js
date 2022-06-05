@@ -1,13 +1,13 @@
-const Product = require("../models/productSchema");
+const Category = require("../models/categorySchema");
 
 module.exports = {
   getAll: async (req, res) => {
     try {
-      const data = await Product.find().populate("category", "name");
+      const data = await Category.find();
 
       res.json({
-        message: "get all product success",
-        product: data,
+        message: "get all success",
+        category: data,
       });
     } catch (error) {
       console.error(error);
@@ -15,33 +15,33 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      const data = await Product.findById(req.params.id);
+      const data = await Category.findById(req.params.id);
 
       res.json({
         msg: "success get data by ID",
-        products: data,
+        category: data,
       });
     } catch (error) {
       console.error(error);
     }
   },
-  addProduct: async (req, res) => {
+  addCategory: async (req, res) => {
     try {
       const data = req.body;
 
-      await Product.create(data);
+      await Category.create(data);
 
       res.json({
-        msg: "success add product",
+        msg: "succes add Category",
       });
     } catch (error) {
       console.error(error);
     }
   },
 
-  updateProduct: async (req, res) => {
+  updateById: async (req, res) => {
     try {
-      await Product.updateOne({ _id: req.params.id }, { $set: req.body });
+      await Category.updateOne({ _id: req.params.id }, { $set: req.body });
 
       res.json({
         msg: "success update",
@@ -51,9 +51,9 @@ module.exports = {
     }
   },
 
-  deleteProductById: async (req, res) => {
+  deleteById: async (req, res) => {
     try {
-      await Product.deleteOne({ _id: req.params.id });
+      await Category.deleteOne({ _id: req.params.id });
 
       res.json({
         msg: "delete success",
