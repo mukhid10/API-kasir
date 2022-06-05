@@ -15,6 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("welcome api kasir");
+});
 const allRouter = require("./routes/index");
 app.use(allRouter);
 
