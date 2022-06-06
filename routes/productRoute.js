@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   getAll,
   getById,
+  getByUserId,
   updateProduct,
   deleteProductById,
   addProduct,
@@ -11,6 +12,7 @@ const {
 
 router.get("/", getAll);
 router.get("/:id", getById);
+router.get("/:userId", getByUserId);
 router.post("/", addProduct);
 router.patch("/:id", updateProduct);
 router.delete("/:id", deleteProductById);

@@ -3,7 +3,9 @@ const Product = require("../models/productSchema");
 module.exports = {
   getAll: async (req, res) => {
     try {
-      const data = await Product.find().populate("category", "name");
+      const data = await Product.find()
+        .populate("category", "name -_id")
+        .populate("userId", "_id");
 
       res.json({
         message: "get all product success",
@@ -15,10 +17,28 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      const data = await Product.findById(req.params.id);
+      const data = await Product.findById(req.params.id)
+        .populate("category", "name -_id")
+        .populate("userId", "_id");
 
       res.json({
         msg: "success get data by ID",
+        products: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  getByUserId: async (req, res) => {
+    try {
+      const data = await Product.findById({ userId: "userId" })
+        .populate("category", "name -_id")
+        .populate("userId", "_id");
+
+      console.log(req.params);
+
+      res.json({
+        msg: "success get data by userID",
         products: data,
       });
     } catch (error) {

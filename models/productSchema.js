@@ -14,7 +14,7 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   category: {
-    type: [mongoose.Types.ObjectId],
+    type: mongoose.Types.ObjectId,
     ref: "category",
   },
   kode: {
@@ -22,6 +22,10 @@ const productSchema = mongoose.Schema({
   },
   desc: {
     type: String,
+  },
+  userId: {
+    type: mongoose.Types.ObjectId,
+    ref: "users",
   },
 });
 
