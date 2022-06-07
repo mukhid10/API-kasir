@@ -31,9 +31,10 @@ module.exports = {
   },
   getByUserId: async (req, res) => {
     try {
-      const data = await Product.findById({ userId: "userId" })
+      const data = await Product.find(req.params.userId)
         .populate("category", "name -_id")
         .populate("userId", "_id");
+      console.log(req.params.id);
 
       console.log(req.params);
 

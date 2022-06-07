@@ -24,8 +24,8 @@ const productSchema = mongoose.Schema({
     type: String,
   },
   userId: {
-    type: mongoose.Types.ObjectId,
-    ref: "users",
+    type: String,
+    required: true,
   },
 });
 

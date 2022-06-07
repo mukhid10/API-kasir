@@ -12,7 +12,7 @@ const {
 
 router.get("/", getAll);
 router.get("/:id", getById);
-router.get("/:userId", getByUserId);
+router.get("/user/:userId", getByUserId);
 router.post("/", addProduct);
 router.patch("/:id", updateProduct);
 router.delete("/:id", deleteProductById);
