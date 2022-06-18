@@ -10,7 +10,7 @@ const authJWT = require("../auth");
 
 router.use("/", loginRegis);
 
-router.use(authJWT);
+// router.use(authJWT);
 
 router.use("/users", userRoute);
 router.use("/products", productRoute);

@@ -31,14 +31,13 @@ module.exports = {
   },
   getByUserId: async (req, res) => {
     try {
-      const data = await Product.find(req.params.userId)
+      const data = await Product.find({
+        userId: req.body.userId,
+      })
         .populate("category", "name -_id")
         .populate("userId", "_id");
-      console.log(req.params.id);
 
-      console.log(req.params);
-
-      res.json({
+      res.status(200).json({
         msg: "success get data by userID",
         products: data,
       });
@@ -48,9 +47,19 @@ module.exports = {
   },
   addProduct: async (req, res) => {
     try {
-      const data = req.body;
+      const { name, price, stock, category, kode, desc, userId } = req.body;
+      const image = req.file.path;
 
-      await Product.create(data);
+      await Product.create({
+        name: name,
+        price: price,
+        stock: stock,
+        category: category,
+        kode: kode,
+        desc: desc,
+        userId: userId,
+        image: image,
+      });
 
       res.json({
         msg: "success add product",
@@ -62,7 +71,23 @@ module.exports = {
 
   updateProduct: async (req, res) => {
     try {
-      await Product.updateOne({ _id: req.params.id }, { $set: req.body });
+      const { name, price, stock, category, kode, desc, userId } = req.body;
+      const image = req.file.path;
+      await Product.updateOne(
+        { _id: req.params.id },
+        {
+          $set: {
+            name: name,
+            price: price,
+            stock: stock,
+            category: category,
+            kode: kode,
+            desc: desc,
+            userId: userId,
+            image: `http://localhost:5000/${image}`,
+          },
+        }
+      );
 
       res.json({
         msg: "success update",
